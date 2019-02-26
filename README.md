@@ -23,11 +23,11 @@ To create your playbook(s) you can use the Excel Workbook provided in the reposi
 
 For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag. e.g:
  
- # - python PyPlaybook.py
+  - python PyPlaybook.py
     usage: PyPlaybookv.py [-h] -i INPUTFILE -w W
     PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w [-o OUTPUTFILE]
     
- # - PyPlaybook.py -h
+  - PyPlaybook.py -h
     usage: PyPlaybookv.py [-h] -i INPUTFILE -w W [-o OUTPUTFILE]
 
     Playbook Runner by David Morfe
