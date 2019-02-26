@@ -30,7 +30,7 @@ For help on how to run the PyPlaybook.py, run the program without any parameters
   - PyPlaybook.py -h
     usage: PyPlaybookv.py [-h] -i INPUTFILE -w W [-o OUTPUTFILE]
 
-    Playbook Runner by David Morfe
+    Playbook Orchestration by David Morfe
 
     optional arguments:
       -h, --help            show this help message and exit
