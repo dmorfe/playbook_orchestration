@@ -24,11 +24,11 @@ To create your playbook(s) you can use the Excel Workbook provided in the reposi
 For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag. e.g:
  
   - python PyPlaybook.py
-    usage: PyPlaybookv.py [-h] -i INPUTFILE -w W
-    PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w [-o OUTPUTFILE]
+    usage: PyPlaybookv.py [-h] -i INPUTFILE -w W [-v]
+    PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w
     
   - PyPlaybook.py -h
-    usage: PyPlaybookv.py [-h] -i INPUTFILE -w W [-o OUTPUTFILE]
+    usage: PyPlaybookv.py [-h] -i INPUTFILE -w W
 
     Playbook Orchestration by David Morfe
 
@@ -39,9 +39,6 @@ For help on how to run the PyPlaybook.py, run the program without any parameters
       -w W                  specify if configuration should be save into Startup
                             Config. 'Y' to write config 'N.\ to preserve Startup
                             Config. This is a required paramenter.
-      -o OUTPUTFILE, --outputfile OUTPUTFILE
-                            output destination file.
-
-The -o --outputfile is not implemented yet.                            
-
+      -v, --version         show program's version number and exit
+  
 This playbook will create a '.log' file in the current directory from where the PyPlaybook is ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
