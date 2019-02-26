@@ -10,12 +10,12 @@ This tool will allow you to read playbook(s) from an Excel workbook. If the Exce
     - xlrd
     - pandas
 
-# To install the packages from CLI:
-    - sudo pip install xlrd pandas netmiko
+# To install the packages:
+    - Linux: sudo pip install xlrd pandas netmiko
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
-Once you have your Python environment setup just copy the PyPlaybook.py into a folder in the file system you install Python.
+Once you have your Python environment setup just drop the PyPlaybook.py into a folder in computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
 The tool needs to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be pass arguments.
 
