@@ -14,7 +14,7 @@ Once you have your Python environment setup just copy the PyPlaybook.py into a f
 
 The tool needs to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be pass arguments.
 
-To create your playbook(s) you can use the Excel Workbook provided in the repository.
+To create your playbook(s) you can use the Excel Workbook provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported  device_type are include on this raw and can be selected on the device_type column from the drop down list.
 
 For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag. e.g:
   - python PyPlaybook.py
