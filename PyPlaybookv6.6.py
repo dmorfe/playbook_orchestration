@@ -19,7 +19,7 @@ common_user = ''
 common_pass = ''
 common_secret = ''
 
-device_queue = Queue(50)
+device_queue = Queue(qs)
 
 # establishes connection to device and returns an object back
 def connectToDevice(devcreds):
@@ -67,7 +67,7 @@ def getargs():
      help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N.\ to preserve Startup Config. This is a required paramenter.')
     parser.add_argument('-ts',required=True,\
-      help='Number of Threads to be created.\nMust be a number from 1 thru 20\NIf a number greater than 20 is entered, the maximum Thread number will be used.')
+      help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number greater than 20 is entered, the maximum Thread number will be used.')
     parser.add_argument('-qs',required=True,\
       help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is entered, the maximum Queue number will used.')
     parser.add_argument('-o','--outputfile', help='output destination file.')
@@ -88,7 +88,7 @@ def CreateThreads(n):
         t.deamon = True
         t.start()
 
-def ThreadHandler()
+def ThreadHandler():
     while True:
         dev_data = device_queue.get()
         MakeChangesAndLog(dev_data)
