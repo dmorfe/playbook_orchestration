@@ -19,7 +19,7 @@ common_user = ''
 common_pass = ''
 common_secret = ''
 
-device_queue = Queue(qs)
+device_queue = Queue(arguments.qs)
 
 # establishes connection to device and returns an object back
 def connectToDevice(devcreds):
@@ -71,6 +71,7 @@ def getargs():
     parser.add_argument('-qs',required=True,\
       help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is entered, the maximum Queue number will used.')
     parser.add_argument('-o','--outputfile', help='output destination file.')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 6.6')
     args = parser.parse_args()
 
     if args.ts > TS_LIMIT:
