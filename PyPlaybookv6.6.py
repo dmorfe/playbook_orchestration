@@ -67,11 +67,9 @@ def getargs():
      help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N.\ to preserve Startup Config. This is a required paramenter.')
     parser.add_argument('-ts',required=True,\
-      help='Number of Threads to be created.\nMust be a number from 1 thru ' + TS_LIMIT +'.\NIf a number greater than ' + TS_LIMIT + \
-      ' is entered, the maximum Thread number will be used.')
+      help='Number of Threads to be created.\nMust be a number from 1 thru 20\NIf a number greater than 20 is entered, the maximum Thread number will be used.')
     parser.add_argument('-qs',required=True,\
-      help='Queue size.\nMust be a number from 1 thru ' + QS_LIMIT '. If a number greater than ' + QS_LIMIT + \
-      ' is entered, the maximum Queue number will used.')
+      help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is entered, the maximum Queue number will used.')
     parser.add_argument('-o','--outputfile', help='output destination file.')
     args = parser.parse_args()
 
@@ -212,7 +210,7 @@ def main():
     common_user = getusername()
     common_pass = getpassword(common_user)
     common_secret = getpassword('enable/secret')
-    
+
     # Initializes the threads.
     CreateThreads(arguments.ts)
 
