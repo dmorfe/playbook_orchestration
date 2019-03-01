@@ -19,8 +19,6 @@ common_user = ''
 common_pass = ''
 common_secret = ''
 
-device_queue = Queue(arguments.qs)
-
 # establishes connection to device and returns an object back
 def connectToDevice(devcreds):
     ctd = ConnectHandler(**devcreds)
@@ -206,7 +204,8 @@ def MakeChangesAndLog(rw):
 def main():
     #read arn parse arguments from command line
     arguments = getargs()
-
+    device_queue = Queue(arguments.qs)
+    
     worksheets = {}
     common_user = getusername()
     common_pass = getpassword(common_user)
