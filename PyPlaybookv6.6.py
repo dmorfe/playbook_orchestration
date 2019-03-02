@@ -19,6 +19,8 @@ common_user = ''
 common_pass = ''
 common_secret = ''
 
+device_queue = Queue()
+
 # establishes connection to device and returns an object back
 def connectToDevice(devcreds):
     ctd = ConnectHandler(**devcreds)
@@ -72,17 +74,17 @@ def getargs():
     parser.add_argument('-v','--version', action='version', version='%(prog)s 6.6')
     args = parser.parse_args()
 
-    if args.ts > TS_LIMIT:
+    if int(args.ts) > TS_LIMIT:
         args.ts = TS_LIMIT
 
-    if args.qs > QS_LIMIT:
+    if int(args.qs) > QS_LIMIT:
         args.qs = QS_LIMIT
 
     return(args)
 
 def CreateThreads(n):
     print('Creating ' + n + ' Threads')
-    for x in range(n):
+    for x in range(int(n)):
         t = Thread(target=ThreadHandler)
         t.deamon = True
         t.start()
@@ -91,8 +93,8 @@ def ThreadHandler():
     while True:
         dev_data = device_queue.get()
         MakeChangesAndLog(dev_data)
-        dev_data.task_done()
-        print(threading.current_thread().name + '-' + dev_data['ip'] + 'Submitted')
+        device_queue.task_done()
+        print(threading.current_thread().name + '-' + dev_data['IP'] + 'Submitted')
 
 # Connects to device runs commands and creates and log file
 def MakeChangesAndLog(rw):
@@ -204,8 +206,7 @@ def MakeChangesAndLog(rw):
 def main():
     #read arn parse arguments from command line
     arguments = getargs()
-    device_queue = Queue(arguments.qs)
-    
+
     worksheets = {}
     common_user = getusername()
     common_pass = getpassword(common_user)
