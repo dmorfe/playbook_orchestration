@@ -39,7 +39,7 @@ For help on how to run the PyPlaybook.py, run the program without any parameters
       -i INPUTFILE, --inputfile INPUTFILE
                             inputfile name is required.
       -w W                  specify if configuration should be save into Startup
-                            Config. 'Y' to write config 'N.\ to preserve Startup
+                            Config. 'Y' to write config 'N' to preserve Startup
                             Config. This is a required paramenter.
       -ts TS                Number of Threads to be created. Must be a number from
                             1 thru 20 If a number greater than 20 is entered, the
