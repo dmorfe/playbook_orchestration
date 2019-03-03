@@ -15,9 +15,9 @@ import argparse
 SHOWCOMMANDS = ['show run','show interface status','show vlan']
 TS_LIMIT = 20
 QS_LIMIT = 50
-common_user = ''
-common_pass = ''
-common_secret = ''
+default_user = ''
+default_pass = ''
+default_secret = ''
 
 device_queue = Queue()
 
@@ -86,7 +86,7 @@ def CreateThreads(n):
     print('Creating ' + n + ' Threads')
     for x in range(int(n)):
         t = Thread(target=ThreadHandler)
-        t.deamon = True
+        t.daemon = True
         t.start()
 
 def ThreadHandler():
@@ -94,7 +94,7 @@ def ThreadHandler():
         dev_data = device_queue.get()
         MakeChangesAndLog(dev_data)
         device_queue.task_done()
-        print(threading.current_thread().name + '-' + dev_data['IP'] + 'Submitted')
+        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
 
 # Connects to device runs commands and creates and log file
 def MakeChangesAndLog(rw):
@@ -113,18 +113,18 @@ def MakeChangesAndLog(rw):
     playbookinfo['creds']['ip'] = rw.get('IP')
     # if username field in playbook is blank, interactively enter username
     if rw.get('Username') != rw.get('Username') or rw.get('Username').strip() == '':
-        playbookinfo['creds']['username'] = common_user()
+        playbookinfo['creds']['username'] = default_user()
     else:
         playbookinfo['creds']['username'] = rw.get('Username')
     print('Login into: ' + playbookinfo['creds']['ip'] + ' ...' )
     # if password field in playbook is blank, interactively enter password
     if rw.get('Password') != rw.get('Password') or rw.get('Password').strip() == '':
-        playbookinfo['creds']['password'] = common_pass
+        playbookinfo['creds']['password'] = default_pass
     else:
         playbookinfo['creds']['password'] = rw.get('Password')
     # if secret field in playbook is blank ask user if it wants to enter one
     if rw.get('Secret') != rw.get('Secret') or rw.get('Secret') == '':
-        playbookinfo['creds']['secret'] = common_secret
+        playbookinfo['creds']['secret'] = default_secret
     else:
         playbookinfo['creds']['secret'] = rw.get('Secret')
     playbookinfo['ShowCommands'] = str(rw.get('Show_Commands')).split('\n')
@@ -201,16 +201,20 @@ def MakeChangesAndLog(rw):
 
     qalog.close()
     conn.disconnect()
+    print('close log file and device connection')
 
 # program entry point
 def main():
     #read arn parse arguments from command line
     arguments = getargs()
 
+#    device_queue.maxsize(arguments.qs)
+    device_queue.maxsize = int(arguments.qs)
+
     worksheets = {}
-    common_user = getusername()
-    common_pass = getpassword(common_user)
-    common_secret = getpassword('enable/secret')
+    default_user = getusername()
+    default_pass = getpassword(default_user)
+    default_secret = getpassword('enable/secret')
 
     # Initializes the threads.
     CreateThreads(arguments.ts)
@@ -227,6 +231,7 @@ def main():
 
     device_queue.join()
 
+    print(threading.enumerate())
     print('Playbook completed successfully!!')
 
 # call main function when program is ran
