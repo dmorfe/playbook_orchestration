@@ -65,7 +65,7 @@ def getargs():
     parser.add_argument('-i','--inputfile',required=True, help='inputfile name is required.')
     parser.add_argument('-w',required=True,\
      help='specify if configuration should be save into Startup Config.\
-     \'Y\' to write config \'N.\ to preserve Startup Config. This is a required paramenter.')
+     \'Y\' to write config \'N\' to preserve Startup Config. This is a required paramenter.')
     parser.add_argument('-ts',required=True,\
       help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number greater than 20 is entered, the maximum Thread number will be used.')
     parser.add_argument('-qs',required=True,\
