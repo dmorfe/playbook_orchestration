@@ -29,6 +29,7 @@ e.g:
     PyPlaybookv6.6.py: error: the following arguments are required: -i/--inputfile, -w, -ts, -qs
     
   - PyPlaybook.py -h
+  
     usage: PyPlaybookv6.6.py [-h] -i INPUTFILE -w W -ts TS -qs QS [-o OUTPUTFILE]
                 [-v]
     
