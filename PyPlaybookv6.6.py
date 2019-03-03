@@ -82,6 +82,7 @@ def getargs():
 
     return(args)
 
+# Initializes the threads. Expects an interger as a parameter.
 def CreateThreads(n):
     print('Creating ' + n + ' Threads')
     for x in range(int(n)):
