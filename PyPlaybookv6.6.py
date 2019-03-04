@@ -206,6 +206,10 @@ def MakeChangesAndLog(rw):
 
 # program entry point
 def main():
+    global default_user
+    global default_pass
+    global default_secret
+
     #read arn parse arguments from command line
     arguments = getargs()
 
