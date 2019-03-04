@@ -84,9 +84,10 @@ def CreateThreads(n):
 def ThreadHandler():
     while True:
         dev_data = device_queue.get()
+        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
         MakeChangesAndLog(dev_data)
         device_queue.task_done()
-        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
+        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Completed!!')
 
 def MakeChangesAndLog(rw):
     playbookinfo = {
@@ -212,7 +213,7 @@ def main():
 
     with excel.ExcelFile(arguments.inputfile) as wb:
         for sname in wb.sheet_names:
-            print("print sheetname: ", sname)
+            print("Sheetname: ", sname)
             readsheet = excel.read_excel(wb,sheet_name=sname,converters={'Username':str,'Password':str,'Secret':str,'data_type':str})
             df = DataFrame(data=readsheet, copy=True)
             worksheets[sname] = df.to_dict(orient='records')

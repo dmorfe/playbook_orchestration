@@ -93,9 +93,10 @@ def CreateThreads(n):
 def ThreadHandler():
     while True:
         dev_data = device_queue.get()
+        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
         MakeChangesAndLog(dev_data)
         device_queue.task_done()
-        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
+        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Completed!!')
 
 # Connects to device runs commands and creates and log file
 def MakeChangesAndLog(rw):
