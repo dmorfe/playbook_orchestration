@@ -151,6 +151,7 @@ def MakeChangesAndLog(rw):
     print(resultprompt)
 
     cmd = ['interface range ' + portrange, 'switchport mode access', 'switchport access vlan ' + vlan, 'description *** python changed ***']
+    print('Changing Ports config in IDF Switch(es): ' + playbookinfo['creds']['ip'] + '\n')
     commandresults = conn.send_config_set(config_commands=cmd)
     qalog.write(commandresults + '\n\n\n')
 
@@ -158,6 +159,7 @@ def MakeChangesAndLog(rw):
     cmdC = ['interface ' + str(rw.get('CoreTrunk')), 'switchport trunk allowed vlan add ' + vlan]
 
     # changing trunk on L2
+    print('Changing trunk config in IDF Switch(es): ' + playbookinfo['creds']['ip'] + '\n')
     commandresults = conn.send_config_set(config_commands=cmd)
 
     #print ('conf t results back =', commandresults)
@@ -223,7 +225,7 @@ def main():
 
     device_queue.join()
     print(threading.enumerate())
-    
+
     print("All Threads completed successfully!!")
 
 # call main function when program is ran
