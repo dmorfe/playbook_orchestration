@@ -62,7 +62,7 @@ def getargs():
     parser.add_argument('-qs',required=True,\
       help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is entered, the maximum Queue number will used.')
     parser.add_argument('-o','--outputfile', help='output destination file.')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 6.6')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
 
     if int(args.ts) > TS_LIMIT:
