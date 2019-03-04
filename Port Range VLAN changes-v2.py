@@ -222,7 +222,8 @@ def main():
                 device_queue.put(rw)
 
     device_queue.join()
-
+    print(threading.enumerate())
+    
     print("All Threads completed successfully!!")
 
 # call main function when program is ran
