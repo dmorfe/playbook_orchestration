@@ -55,7 +55,7 @@ def getargs():
     parser.add_argument('-w',required=True,\
      help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N.\ to preserve Startup Config. This is a required paramenter.' )
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 6.5')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.5')
     args = parser.parse_args()
     return(args)
 
