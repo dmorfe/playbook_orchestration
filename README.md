@@ -38,20 +38,34 @@ e.g:
     Playbook Runner by David Morfe
     
     optional arguments:
+    
     -h, --help            show this help message and exit
+    
     -i INPUTFILE, --inputfile INPUTFILE
+    
                 inputfile name is required.
+                
     -w W                  specify if configuration should be save into Startup
+    
                 Config. 'Y' to write config 'N' to preserve Startup
+                
                 Config. This is a required paramenter.
+                
     -ts TS                Number of Threads to be created. Must be a number from
+    
                 1 thru 20 If a number greater than 20 is entered, the
+                
                 maximum Thread number will be used.
+                
     -qs QS                Queue size. Must be a number from 1 thru 50. If a
+    
                 number greater than 50 is entered, the maximum Queue
+                
                 number will used.
+                
     -o OUTPUTFILE, --outputfile OUTPUTFILE
                 output destination file.
+                
     -v, --version         show program's version number and exit
 
 This playbook will create a '.log' file in the current directory from where the PyPlaybook is ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
