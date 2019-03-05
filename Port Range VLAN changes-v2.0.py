@@ -128,7 +128,7 @@ def MakeChangesAndLog(rw):
     playbookinfo['creds']['ip'] = rw.get('IP')
     playbookinfo['credsCore']['ip'] = rw.get('CoreIP')
     playbookinfo['credsCore']['device_type'] = playbookinfo['creds']['device_type']
-    portrange = str(rw.get('Metering'))
+    portrange = str(rw.get('Port-Range'))
     vlan = str(rw.get('VLAN'))
 
     conn = connectToDevice(playbookinfo['creds'])
