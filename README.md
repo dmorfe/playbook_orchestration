@@ -46,23 +46,19 @@ e.g:
                 inputfile name is required.
                 
     -w W                  specify if configuration should be save into Startup
-    
-                Config. 'Y' to write config 'N' to preserve Startup
-                
-                Config. This is a required paramenter.
-                
+                          Config. 'Y' to write config 'N' to preserve Startup
+                          Config. If this flag is not specified or any other
+                          value is entered the default will be no to write the
+                          config changes.
     -ts TS                Number of Threads to be created. Must be a number from
-    
-                1 thru 20 If a number greater than 20 is entered, the
-                
-                maximum Thread number will be used.
-                
+                          1 thru 20 If a number greater than 20 is entered, the
+                          maximum Thread number will be used.
     -qs QS                Queue size. Must be a number from 1 thru 50. If a
-    
-                number greater than 50 is entered, the maximum Queue
-                
-                number will used.
-                
+                          number greater than 50 is entered, the maximum Queue
+                          number will used.
+    -o OUTPUTFILE, --outputfile OUTPUTFILE
+                          output destination file.
+
     -o OUTPUTFILE, --outputfile OUTPUTFILE
                 output destination file.
                 
