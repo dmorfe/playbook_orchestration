@@ -13,8 +13,15 @@ import argparse
 
 # default show commands
 SHOWCOMMANDS = ['show run','show interface status','show vlan']
+
+arguments = ''
+
 TS_LIMIT = 20
 QS_LIMIT = 50
+TS_DEFAULT = 10
+QS_DEFAULT = 20
+WRITE_CONFIG_DEFAULT = 'N'
+
 default_user = ''
 default_pass = ''
 default_secret = ''
@@ -63,28 +70,35 @@ def getpassword(usern):
 def getargs():
     parser = argparse.ArgumentParser(description='Playbook Runner by David Morfe')
     parser.add_argument('-i','--inputfile',required=True, help='inputfile name is required.')
-    parser.add_argument('-w',required=True,\
-     help='specify if configuration should be save into Startup Config.\
-     \'Y\' to write config \'N\' to preserve Startup Config. This is a required paramenter.')
-    parser.add_argument('-ts',required=True,\
-      help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number greater than 20 is entered, the maximum Thread number will be used.')
-    parser.add_argument('-qs',required=True,\
-      help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is entered, the maximum Queue number will used.')
+    parser.add_argument('-w', help='specify if configuration should be save into Startup Config.\
+     \'Y\' to write config \'N\' to preserve Startup Config. If this flag is not specified or any other \
+     value is entered the default will be no to write the config changes.')
+    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number \
+    greater than 20 is entered, the maximum Thread number will be used.')
+    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
+    entered, the maximum Queue number will used.')
     parser.add_argument('-o','--outputfile', help='output destination file.')
     parser.add_argument('-v','--version', action='version', version='%(prog)s 1.6')
     args = parser.parse_args()
 
-    if int(args.ts) > TS_LIMIT:
+    if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
+        args.w = WRITE_CONFIG_DEFAULT
+
+    if args.qs is None:
+        args.qs = QS_DEFAULT
+    elif int(args.ts) > TS_LIMIT:
         args.ts = TS_LIMIT
 
-    if int(args.qs) > QS_LIMIT:
+    if args.ts is None:
+        args.ts = TS_DEFAULT
+    elif int(args.qs) > QS_LIMIT:
         args.qs = QS_LIMIT
 
     return(args)
 
 # Initializes the threads. Expects an interger as a parameter.
 def CreateThreads(n):
-    print('Creating ' + n + ' Threads')
+    print('Creating ' + str(n) + ' Threads')
     for x in range(int(n)):
         t = Thread(target=ThreadHandler)
         t.daemon = True
@@ -110,6 +124,8 @@ def MakeChangesAndLog(rw):
             'ShowCommands' : [],
             'ConfigCommands' : []
     }
+
+    global arguments
 
     playbookinfo['creds']['device_type'] = rw.get('device_type')
     playbookinfo['creds']['ip'] = rw.get('IP')
@@ -150,6 +166,7 @@ def MakeChangesAndLog(rw):
               '***               Running show commands           ***\n' + \
               '*****************************************************\n')
         logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
+    
     if (rw.get('Config_Commands') == rw.get('Config_Commands')) and \
     len(str(rw.get('Config_Commands')).strip()) > 0:
         print(\
@@ -176,6 +193,7 @@ def MakeChangesAndLog(rw):
         print( configresults)
         qalog.write(get_logheader('Configuration changes'))
         qalog.write(configresults + '\n')
+
         if arguments.w.upper() == 'Y':
             print(\
                   '*****************************************************\n' + \
@@ -210,11 +228,13 @@ def main():
     global default_user
     global default_pass
     global default_secret
+    global arguments
 
     #read arn parse arguments from command line
     arguments = getargs()
 
-#    device_queue.maxsize(arguments.qs)
+    # device_queue.maxsize(arguments.qs)
+    print('Setting max Queue size to: ', arguments.qs)
     device_queue.maxsize = int(arguments.qs)
 
     worksheets = {}
