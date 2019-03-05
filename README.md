@@ -42,23 +42,18 @@ e.g:
     -h, --help            show this help message and exit
     
     -i INPUTFILE, --inputfile INPUTFILE
-    
-                inputfile name is required.
-                
+                          inputfile name is required.
     -w W                  specify if configuration should be save into Startup
                           Config. 'Y' to write config 'N' to preserve Startup
                           Config. If this flag is not specified or any other
                           value is entered the default will be no to write the
-                          config changes.
+                          config changes. Default: 'N'
     -ts TS                Number of Threads to be created. Must be a number from
                           1 thru 20 If a number greater than 20 is entered, the
-                          maximum Thread number will be used.
+                          maximum Thread number will be used. Default: '10'
     -qs QS                Queue size. Must be a number from 1 thru 50. If a
                           number greater than 50 is entered, the maximum Queue
-                          number will used.
-    -o OUTPUTFILE, --outputfile OUTPUTFILE
-                          output destination file.
-
+                          number will used. Default: '20'
     -o OUTPUTFILE, --outputfile OUTPUTFILE
                 output destination file.
                 
