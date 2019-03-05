@@ -61,11 +61,11 @@ def getargs():
     parser.add_argument('-i','--inputfile',required=True, help='inputfile name is required.')
     parser.add_argument('-w', help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N\' to preserve Startup Config. If this flag is not specified or any other \
-     value is entered the default will be no to write the config changes.')
-    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a \
-    number greater than 20 is entered, the maximum Thread number will be used.')
-    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 \
-    is entered, the maximum Queue number will used.')
+     value is entered the default will be no to write the config changes.\nDefault: \'N\'')
+    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number \
+    greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
+    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
+    entered, the maximum Queue number will used.\nDefault: \'20\'')
     parser.add_argument('-o','--outputfile', help='output destination file.')
     parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
