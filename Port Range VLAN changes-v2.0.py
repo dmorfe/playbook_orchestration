@@ -130,6 +130,7 @@ def MakeChangesAndLog(rw):
     playbookinfo['credsCore']['device_type'] = playbookinfo['creds']['device_type']
     portrange = str(rw.get('Port-Range'))
     vlan = str(rw.get('VLAN'))
+    description = str(rw.get('Description'))
 
     conn = connectToDevice(playbookinfo['creds'])
 
@@ -164,13 +165,13 @@ def MakeChangesAndLog(rw):
     #resultprompt = conn.config_mode()
     print(resultprompt)
 
-    cmd = ['interface range ' + portrange, 'switchport mode access', 'switchport access vlan ' + vlan, 'description *** python changed ***']
+    cmd = ['interface range ' + portrange, 'switchport mode access', 'switchport access vlan ' + vlan, 'description *** ' + description + ' ***']
     print('Changing Ports config in IDF Switch(es): ' + playbookinfo['creds']['ip'] + '\n')
     commandresults = conn.send_config_set(config_commands=cmd)
     qalog.write(commandresults + '\n\n\n')
 
-    cmd = ['interface ' + str(rw.get('IDFTrunk')), 'switchport trunk allowed vlan add ' + vlan]
-    cmdC = ['interface ' + str(rw.get('CoreTrunk')), 'switchport trunk allowed vlan add ' + vlan]
+    cmd = ['interface range ' + str(rw.get('IDFTrunk')), 'switchport trunk allowed vlan add ' + vlan]
+    cmdC = ['interface range ' + str(rw.get('CoreTrunk')), 'switchport trunk allowed vlan add ' + vlan]
 
     # changing trunk on L2
     print('Changing trunk config in IDF Switch(es): ' + playbookinfo['creds']['ip'] + '\n')
