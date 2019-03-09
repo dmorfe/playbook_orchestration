@@ -66,7 +66,6 @@ def getargs():
     greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
     entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-o','--outputfile', help='output destination file.')
     parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
 
@@ -75,13 +74,13 @@ def getargs():
 
     if args.qs is None:
         args.qs = QS_DEFAULT
-    elif int(args.ts) > TS_LIMIT:
-        args.ts = TS_LIMIT
+    elif int(args.qs) > QS_LIMIT:
+        args.qs = QS_LIMIT
 
     if args.ts is None:
         args.ts = TS_DEFAULT
-    elif int(args.qs) > QS_LIMIT:
-        args.qs = QS_LIMIT
+    elif int(args.ts) > TS_LIMIT:
+        args.ts = TS_LIMIT
 
     return(args)
 
