@@ -130,7 +130,7 @@ def MakeChangesAndLog(rw):
     playbookinfo['creds']['ip'] = rw.get('IP')
     # if username field in playbook is blank, interactively enter username
     if rw.get('Username') != rw.get('Username') or rw.get('Username').strip() == '':
-        playbookinfo['creds']['username'] = default_user()
+        playbookinfo['creds']['username'] = default_user
     else:
         playbookinfo['creds']['username'] = rw.get('Username')
     print('Login into: ' + playbookinfo['creds']['ip'] + ' ...' )
