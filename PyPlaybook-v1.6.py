@@ -56,7 +56,7 @@ def logshowcommands(qalogH,connH,commands):
 def getusername():
     username = ''
     while username == '':
-        username = input('Enter username: ').strip()
+        username = input('Enter default username: ').strip()
     return(username)
 
 # returns username. function will not exit unless something is entered. this function will not allow enty passwords but will allow for passwords with just spaces in it.
