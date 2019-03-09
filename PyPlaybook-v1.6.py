@@ -85,13 +85,13 @@ def getargs():
 
     if args.qs is None:
         args.qs = QS_DEFAULT
-    elif int(args.qs) > TS_LIMIT:
-        args.qs = TS_LIMIT
+    elif int(args.qs) > QS_LIMIT:
+        args.qs = QS_LIMIT
 
     if args.ts is None:
         args.ts = TS_DEFAULT
-    elif int(args.ts) > QS_LIMIT:
-        args.ts = QS_LIMIT
+    elif int(args.ts) > TS_LIMIT:
+        args.ts = TS_LIMIT
 
     return(args)
 
