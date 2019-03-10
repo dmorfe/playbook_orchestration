@@ -68,10 +68,6 @@ e.g:
                           
                           number will used. Default: '20'
 
-    -o OUTPUTFILE, --outputfile OUTPUTFILE
-    
-                          output destination file.
-
     -v, --version         show program's version number and exit
 
 This playbook will create a '.log' file in the current directory from where the PyPlaybook is ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
