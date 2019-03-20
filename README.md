@@ -3,15 +3,15 @@
 
 # PyPlaybook-v1.6.py:
 Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes.
-This tool will allow you to read playbook(s) from an Excel workbook and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
+This tool will allow you to read playbook(s) from an Excel workbook (see Playbook_template.xlsx) and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
 
 # Port Range VLAN changes-v2.0.py:
 This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core.
-The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes-v2.0.xlsx template).
+The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes.xlsx template).
 
 These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
 
-# This program requires the following Python version and packages:
+# These programs require the following Python version and packages:
   - Python 3.x.x or Higher (recommended version 3.7.2)
   - Python packages:
     - netmiko
@@ -24,11 +24,11 @@ These programs have been designed to connect to multiple devices at the same tim
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
-Once you have your Python environment setup just drop the PyPlaybook.py into a folder in computer you installed Python and give it a go after you finish reading the rest of this Readme file.
+Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
-The tool needs to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be pass arguments.
+The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be pass arguments.
 
-To create your playbook(s) you can use the Excel Workbook provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
+To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
 
 For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.
 e.g:
@@ -76,4 +76,4 @@ e.g:
 
     -v, --version         show program's version number and exit
 
-This playbook will create a '.log' file in the current directory from where the PyPlaybook is ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
+These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
