@@ -1,10 +1,15 @@
 
 # Playbook Orchestration tool for Network Engineers. Orchestration Tool for Network Engineers.
+
 # PyPlaybook-v1.6.py:
 Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes.
 This tool will allow you to read playbook(s) from an Excel workbook and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
 
-This program has been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as a linear process.
+# Port Range VLAN changes-v2.0.py:
+This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core.
+The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes-v2.0.xlsx template).
+
+These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
 
 # This program requires the following Python version and packages:
   - Python 3.x.x or Higher (recommended version 3.7.2)
