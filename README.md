@@ -1,6 +1,8 @@
 
 # Playbook Orchestration tool for Network Engineers. Orchestration Tool for Network Engineers.
 
+# These programs don't have any error handling so if you provide the wrong information the programs will terminate abnormaly. I will implement error handling on the next version of the program.
+
 # PyPlaybook-v1.6.py:
 Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes.
 This tool will allow you to read playbook(s) from an Excel workbook (see Playbook_template.xlsx) and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
