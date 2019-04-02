@@ -3,11 +3,11 @@
 
 # These programs don't have any error handling so if you provide the wrong information the programs will terminate abnormaly. I will implement error handling on the next version of the program.
 
-# PyPlaybook-v1.6.py:
+# PyPlaybook.py:
 Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes.
 This tool will allow you to read playbook(s) from an Excel workbook (see Playbook_template.xlsx) and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
 
-# Port Range VLAN changes-v2.0.py:
+# Port Range VLAN changes.py:
 This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core.
 The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes.xlsx template).
 
@@ -22,7 +22,7 @@ These programs have been designed to connect to multiple devices at the same tim
 
 # To install the packages:
     - Linux: sudo pip install xlrd pandas netmiko
-    - Windows(run as administrator): pip -m install xlrd pandas netmiko
+    - Windows(run as administrator): pip install xlrd pandas netmiko
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
@@ -34,14 +34,14 @@ To create your playbook(s) you can use the Excel Workbooks provided in the repos
 
 For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.
 e.g:
-  - python PyPlaybook-v1.6.py
-    usage: PyPlaybook-v1.6.py [-h] -i INPUTFILE -w W
+  - python PyPlaybook.py
+    usage: PyPlaybook.py [-h] -i INPUTFILE -w W
                              [-v]
-    PyPlaybook-v1.6.py: error: the following arguments are required: -i/--inputfile, -w
+    PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w
     
-  - PyPlaybook-v1.6.py -h
+  - PyPlaybook.py -h
   
-    usage: PyPlaybook-v1.6.py [-h] -i INPUTFILE -w W -ts TS -qs QS
+    usage: PyPlaybook.py [-h] -i INPUTFILE -w W -ts TS -qs QS
                 [-v]
     
     Playbook Runner by David Morfe
@@ -66,9 +66,9 @@ e.g:
 
     -ts TS                Number of Threads to be created. Must be a number from
     
-                          1 thru 20 If a number greater than 20 is entered, the
+                          1 thru 4 If a number greater than 4 is entered, the
                           
-                          maximum Thread number will be used. Default: '10'
+                          maximum Thread number will be used. Default: '2'
 
     -qs QS                Queue size. Must be a number from 1 thru 50. If a
     

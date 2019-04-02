@@ -13,9 +13,9 @@ import argparse
 
 arguments = ''
 
-TS_LIMIT = 20
+TS_LIMIT = 4
 QS_LIMIT = 50
-TS_DEFAULT = 10
+TS_DEFAULT = 2
 QS_DEFAULT = 20
 WRITE_CONFIG_DEFAULT = 'N'
 
@@ -62,11 +62,11 @@ def getargs():
     parser.add_argument('-w', help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N\' to preserve Startup Config. If this flag is not specified or any other \
      value is entered the default will be no to write the config changes.\nDefault: \'N\'')
-    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number \
-    greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
+    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 4\nIf a number \
+    greater than 4 is entered, the maximum Thread number will be used.\nDefault: \'2\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
     entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 2.1')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
