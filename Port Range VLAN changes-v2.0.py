@@ -107,7 +107,7 @@ def MakeChangesAndLog(rw):
                 'ip' : "",
                 'username' : "",
                 'password' : "",
-                'secret' : "ScHn31d3r" },
+                'secret' : "" },
             'credsCore' : {
                 'device_type' : "",
                 'ip' : "",
