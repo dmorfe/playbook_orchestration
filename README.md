@@ -22,7 +22,7 @@ These programs have been designed to connect to multiple devices at the same tim
 
 # To install the packages:
     - Linux: sudo pip install xlrd pandas netmiko
-    - Windows(run as administrator): pip -m install xlrd pandas netmiko
+    - Windows(run as administrator): pip install xlrd pandas netmiko
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
