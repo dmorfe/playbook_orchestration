@@ -207,6 +207,7 @@ def MakeChangesAndLog(rw):
             configresults = conn.send_command('write mem')
             print(configresults)
             qalog.write(configresults)
+            qalog.write('\n')
         print(\
               '*****************************************************\n' + \
               '*** Running show commands - after configurations  ***\n' + \
