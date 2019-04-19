@@ -48,9 +48,11 @@ def openlogfile(hostname, ip):
 def logshowcommands(qalogH,connH,commands):
     for cmd in commands:
         print(cmd)
-        showresults = connH.send_command(cmd)
-        qalogH.write(get_logheader(cmd))
-        qalogH.write(showresults + '\n\n')
+        # if cmd is empty skip
+        if len(str(cmd).strip()) > 0:
+            showresults = connH.send_command(cmd)
+            qalogH.write(get_logheader(cmd))
+            qalogH.write(showresults + '\n\n')
 
 # returns username. function will not exit unless something is entered.
 def getusername():
