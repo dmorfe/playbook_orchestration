@@ -79,7 +79,7 @@ def getargs():
     greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
     entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.6')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.7')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
@@ -108,10 +108,10 @@ def CreateThreads(n):
 def ThreadHandler():
     while True:
         dev_data = device_queue.get()
-        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Submitted')
+        print(threading.current_thread().name + '-' + str(dev_data['IP']).strip() + ' Submitted')
         MakeChangesAndLog(dev_data)
         device_queue.task_done()
-        print(threading.current_thread().name + '-' + dev_data['IP'] + ' Completed!!')
+        print(threading.current_thread().name + '-' + str(dev_data['IP']).strip() + ' Completed!!')
 
 # Connects to device runs commands and creates and log file
 def MakeChangesAndLog(rw):
@@ -129,15 +129,15 @@ def MakeChangesAndLog(rw):
     global arguments
 
     playbookinfo['creds']['device_type'] = rw.get('device_type')
-    playbookinfo['creds']['ip'] = rw.get('IP')
+    playbookinfo['creds']['ip'] = str(rw.get('IP')).strip()
     # if username field in playbook is blank, interactively enter username
-    if rw.get('Username') != rw.get('Username') or rw.get('Username').strip() == '':
+    if rw.get('Username') != rw.get('Username') or rw.get('Username') == '':
         playbookinfo['creds']['username'] = default_user
     else:
-        playbookinfo['creds']['username'] = rw.get('Username')
+        playbookinfo['creds']['username'] = str(rw.get('Username')).strip()
     print('Login into: ' + playbookinfo['creds']['ip'] + ' ...' )
     # if password field in playbook is blank, interactively enter password
-    if rw.get('Password') != rw.get('Password') or rw.get('Password').strip() == '':
+    if rw.get('Password') != rw.get('Password') or str(rw.get('Password')).strip() == '':
         playbookinfo['creds']['password'] = default_pass
     else:
         playbookinfo['creds']['password'] = rw.get('Password')
