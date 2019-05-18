@@ -15,6 +15,7 @@ import argparse
 SHOWCOMMANDS = ['show run','show interface status','show vlan']
 
 arguments = ''
+error_flag = False
 
 TS_LIMIT = 20
 QS_LIMIT = 50
@@ -43,6 +44,15 @@ def get_logheader(commandSent):
 def openlogfile(hostname, ip):
     fileH = open(hostname[:len(hostname)-1] + "-" + str(ip) + ".log",'a')
     return(fileH)
+
+# write error to error.log
+def write_error_log(devname, errobj):
+    msg = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")) + ' - Login into: ' + devname + ' failed\n' + \
+    '   Error: ' + str(errobj) + '\n'
+    print(msg)
+    errfh = open('error.log','a')
+    errfh.write(msg)
+    errfh.close()
 
 # write command header and results to openlogfile
 def logshowcommands(qalogH,connH,commands):
@@ -79,7 +89,7 @@ def getargs():
     greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
     entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.7')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.8')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
@@ -127,6 +137,7 @@ def MakeChangesAndLog(rw):
     }
 
     global arguments
+    global error_flag
 
     playbookinfo['creds']['device_type'] = rw.get('device_type')
     playbookinfo['creds']['ip'] = str(rw.get('IP')).strip()
@@ -149,80 +160,87 @@ def MakeChangesAndLog(rw):
     playbookinfo['ShowCommands'] = str(rw.get('Show_Commands')).split('\n')
     playbookinfo['ConfigCommands'] = str(rw.get('Config_Commands')).split('\n')
 
-    conn = connectToDevice(playbookinfo['creds'])
-    resultprompt = conn.find_prompt()
-
-    if resultprompt[len(resultprompt)-1] != "#":
-        print("----> Changing from User mode to privilege mode <----\n" + resultprompt)
-        conn.enable()
+    # test connection to device. if failed log device info into error.log
+    try:
+        conn = connectToDevice(playbookinfo['creds'])
         resultprompt = conn.find_prompt()
-        print(resultprompt)
-    else:
-        print("----> Already in privilege mode <----\n" + resultprompt)
-    qalog = openlogfile(resultprompt, playbookinfo['creds']['ip'])
-    if (rw.get('Show_Commands') == rw.get('Show_Commands')) and \
-    len(str(rw.get('Show_Commands')).strip()) > 0 and rw.get('Config_Commands') != rw.get('Config_Commands'):
-        print(\
-              '*****************************************************\n' + \
-              '***               Running show commands           ***\n' + \
-              '*****************************************************\n')
-        logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
 
-    if (rw.get('Config_Commands') == rw.get('Config_Commands')) and \
-    len(str(rw.get('Config_Commands')).strip()) > 0:
-        print(\
-              '*****************************************************\n' + \
-              '***                Entering config mode           ***\n' + \
-              '*****************************************************\n')
-        print(\
-              '*****************************************************\n' + \
-              '***    Running show commands - before changes     ***\n' + \
-              '*****************************************************\n')
-        qalog.write(\
-              '*****************************************************\n' + \
-              '***    Running show commands - before changes     ***\n' + \
-              '*****************************************************\n')
-        if rw.get('Show_Commands') == rw.get('Show_Commands'):
-            logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
+        if resultprompt[len(resultprompt)-1] != "#":
+            print("----> Changing from User mode to privilege mode <----\n" + resultprompt)
+            conn.enable()
+            resultprompt = conn.find_prompt()
+            print(resultprompt)
         else:
-            logshowcommands(qalog,conn,SHOWCOMMANDS)
-        configresults = conn.send_config_set(config_commands=playbookinfo['ConfigCommands'])
-        print(\
-              '*****************************************************\n' + \
-              '***              Configurations Changes           ***\n' + \
-              '*****************************************************\n')
-        print( configresults)
-        qalog.write(get_logheader('Configuration changes'))
-        qalog.write(configresults + '\n')
-
-        if arguments.w.upper() == 'Y':
+            print("----> Already in privilege mode <----\n" + resultprompt)
+        qalog = openlogfile(resultprompt, playbookinfo['creds']['ip'])
+        if (rw.get('Show_Commands') == rw.get('Show_Commands')) and \
+        len(str(rw.get('Show_Commands')).strip()) > 0 and rw.get('Config_Commands') != rw.get('Config_Commands'):
             print(\
                   '*****************************************************\n' + \
-                  '***   Writing Running Config to Startup Config    ***\n' + \
+                  '***               Running show commands           ***\n' + \
+                  '*****************************************************\n')
+            logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
+
+        if (rw.get('Config_Commands') == rw.get('Config_Commands')) and \
+        len(str(rw.get('Config_Commands')).strip()) > 0:
+            print(\
+                  '*****************************************************\n' + \
+                  '***                Entering config mode           ***\n' + \
+                  '*****************************************************\n')
+            print(\
+                  '*****************************************************\n' + \
+                  '***    Running show commands - before changes     ***\n' + \
                   '*****************************************************\n')
             qalog.write(\
                   '*****************************************************\n' + \
-                  '***   Writing Running Config to Startup Config    ***\n' + \
+                  '***    Running show commands - before changes     ***\n' + \
                   '*****************************************************\n')
-            configresults = conn.send_command('write mem')
-            print(configresults)
+            if rw.get('Show_Commands') == rw.get('Show_Commands'):
+                logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
+            else:
+                logshowcommands(qalog,conn,SHOWCOMMANDS)
+            configresults = conn.send_config_set(config_commands=playbookinfo['ConfigCommands'])
+            print(\
+                  '*****************************************************\n' + \
+                  '***              Configurations Changes           ***\n' + \
+                  '*****************************************************\n')
+            print( configresults)
+            qalog.write(get_logheader('Configuration changes'))
             qalog.write(configresults + '\n')
-        print(\
+
+            if arguments.w.upper() == 'Y':
+                print(\
+                      '*****************************************************\n' + \
+                      '***   Writing Running Config to Startup Config    ***\n' + \
+                      '*****************************************************\n')
+                qalog.write(\
+                      '*****************************************************\n' + \
+                      '***   Writing Running Config to Startup Config    ***\n' + \
+                      '*****************************************************\n')
+                configresults = conn.send_command('write mem')
+                print(configresults)
+                qalog.write(configresults + '\n')
+            print(\
+                  '*****************************************************\n' + \
+                  '*** Running show commands - after configurations  ***\n' + \
+                  '*****************************************************\n')
+            qalog.write(\
               '*****************************************************\n' + \
               '*** Running show commands - after configurations  ***\n' + \
               '*****************************************************\n')
-        qalog.write(\
-          '*****************************************************\n' + \
-          '*** Running show commands - after configurations  ***\n' + \
-          '*****************************************************\n')
-        if rw.get('Show_Commands') == rw.get('Show_Commands'):
-            logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
-        else:
-            logshowcommands(qalog,conn,SHOWCOMMANDS)
+            if rw.get('Show_Commands') == rw.get('Show_Commands'):
+                logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
+            else:
+                logshowcommands(qalog,conn,SHOWCOMMANDS)
 
-    qalog.close()
-    conn.disconnect()
-    print('close log file and device connection')
+        qalog.close()
+        conn.disconnect()
+        print('close log file and device connection')
+
+    # capture exception error print and log
+    except Exception as e:
+        error_flag = True
+        write_error_log(playbookinfo['creds']['ip'],e)
 
 # program entry point
 def main():
@@ -259,7 +277,11 @@ def main():
     device_queue.join()
 
     print(threading.enumerate())
-    print('Playbook completed successfully!!')
+    print('\n')
+    if error_flag == True:
+        print('Playbook completed with errors. Check the error.log for device(s) with errors.')
+    else:
+        print('Playbook completed successfully!!')
 
 # call main function when program is ran
 if __name__ == "__main__":
