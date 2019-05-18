@@ -278,7 +278,7 @@ def main():
 
     print(threading.enumerate())
     print('\n')
-    if error_flag == True:
+    if error_flag:
         print('Playbook completed with errors. Check the error.log for device(s) with errors.')
     else:
         print('Playbook completed successfully!!')
