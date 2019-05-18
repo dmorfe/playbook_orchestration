@@ -28,7 +28,7 @@ To install the packages for Windows, open a command prompt as an administator an
 
 Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
-The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be pass arguments.
+The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be passed as an argument.
 
 To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
 
@@ -79,3 +79,5 @@ e.g:
     -v, --version         show program's version number and exit
 
 These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
+
+Error handling added to connection object and error loggin added to save error(s) to error.log.
