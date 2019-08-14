@@ -13,16 +13,26 @@ The port(s) and VLAN information gets read from an excel workbook (see the Port 
 
 These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
 
-# These programs require the following Python version and packages:
-  - Python 3.x.x or Higher (recommended version 3.7.2)
-  - Python packages:
-    - netmiko
-    - xlrd
-    - pandas
+# These programs require the following prerequisites Python version and packages:
+  # Prerequisites:
+    sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt install python3.7
+    sudo apt install python3-pip
+    sudo apt install netmiko pandas xlrd jinja2 PyYAML
+
+  # Required Python Verion and Libraries:
+    - Python 3.x.x or Higher (recommended version 3.7.2)
+    - Python packages:
+      - netmiko
+      - xlrd
+      - pandas
+      - PyYAML
 
 # To install the packages:
-    - Linux: sudo pip install xlrd pandas netmiko
-    - Windows(run as administrator): pip install xlrd pandas netmiko
+    - Linux: sudo pip install xlrd pandas netmiko PyYAML
+    - Windows(run as administrator): pip install xlrd pandas netmiko PyYAML
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
