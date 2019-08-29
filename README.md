@@ -20,7 +20,8 @@ These programs have been designed to connect to multiple devices at the same tim
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install python3.7
     sudo apt install python3-pip
-    sudo apt install netmiko pandas xlrd jinja2 PyYAML
+    sudo python3.7 -m pip install --upgrade pip
+    sudo ln -s /usr/python3.7 python
 
   # Required Python Verion and Libraries:
     - Python 3.x.x or Higher (recommended version 3.7.2)
@@ -28,11 +29,12 @@ These programs have been designed to connect to multiple devices at the same tim
       - netmiko
       - xlrd
       - pandas
+      - pandas.io
       - PyYAML
 
 # To install the packages:
-    - Linux: sudo pip install xlrd pandas netmiko PyYAML
-    - Windows(run as administrator): pip install xlrd pandas netmiko PyYAML
+    - Linux: sudo pip install xlrd pandas pandas.io netmiko PyYAML
+    - Windows(run as administrator): pip install xlrd pandas pandas.io netmiko PyYAML
   
 To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
