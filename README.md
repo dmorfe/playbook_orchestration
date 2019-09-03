@@ -23,7 +23,7 @@ These programs have been designed to connect to multiple devices at the same tim
     sudo python3.7 -m pip install --upgrade pip
     sudo ln -s /usr/python3.7 python
 
-  # Required Python Verion and Libraries:
+  # Required Python Version and Libraries:
     - Python 3.x.x or Higher (recommended version 3.7.2)
     - Python packages:
       - netmiko
