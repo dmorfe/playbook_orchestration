@@ -21,7 +21,7 @@ These programs have been designed to connect to multiple devices at the same tim
     sudo apt install python3.7
     sudo apt install python3-pip
     sudo python3.7 -m pip install --upgrade pip
-    sudo ln -s /usr/python3.7 python
+    sudo ln -s /usr/bin/python3.7 /usr/bin/python
 
   # Required Python Version and Libraries:
     - Python 3.x.x or Higher (recommended version 3.7.2)
