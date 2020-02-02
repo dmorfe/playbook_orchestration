@@ -34,42 +34,40 @@ The port(s) and VLAN information gets read from an excel workbook (see the Port 
       - Linux: sudo pip install xlrd pandas pandas.io netmiko PyYAML
       - Windows(run as administrator): pip install xlrd pandas pandas.io netmiko PyYAML
   
->> To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
+>> - To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
->> Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
+>> - Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
->> The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be passed as an argument.
+>> - The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be passed as an argument.
 
->> To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
+>> - To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
 
->> For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.
->> e.g:
-      - python PyPlaybook.py
-           usage: PyPlaybook.py [-h] -i INPUTFILE -w W
-                             [-v]
-    PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w
+>> - For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.<br>
+>>    -e.g:<br>
+      - python PyPlaybook.py<br>
+        usage: PyPlaybook.py [-h] -i INPUTFILE -w W [-v]<br>
+      - PyPlaybook.py: error: the following arguments are required: -i/--inputfile, -w<br>
     
   - PyPlaybook.py -h
-    usage: PyPlaybook.py [-h] -i INPUTFILE -w W -ts TS -qs QS
-                [-v]
-    Playbook Runner by David Morfe
-    optional arguments:
-    -h, --help            show this help message and exit
-    -i INPUTFILE, --inputfile INPUTFILE  
-                          inputfile name is required.
-    -w W                  specify if configuration should be save into Startup
-                          Config. 'Y' to write config 'N' to preserve Startup
-                          Config. If this flag is not specified or any other
-                          value is entered the default will be no to write the
-                          config changes. Default: 'N'
-    -ts TS                Number of Threads to be created. Must be a number from
-                          1 thru 4 If a number greater than 4 is entered, the
-                          maximum Thread number will be used. Default: '2'
-    -qs QS                Queue size. Must be a number from 1 thru 50. If a
-                          number greater than 50 is entered, the maximum Queue
-                          number will used. Default: '20'
-    -v, --version         show program's version number and exit
+    - usage: PyPlaybook.py [-h] -i INPUTFILE -w W -ts TS -qs QS [-v]<br>
+    - Playbook Runner by David Morfe<br>
+    - optional arguments:<br>
+    -h, --help            show this help message and exit<br>
+    -i INPUTFILE, --inputfile INPUTFILE<br>
+                          inputfile name is required.<br>
+    -w W                  specify if configuration should be save into Startup<br>
+                          Config. 'Y' to write config 'N' to preserve Startup<br>
+                          Config. If this flag is not specified or any other<br>
+                          value is entered the default will be no to write the<br>
+                          config changes. Default: 'N'<br>
+    -ts TS                Number of Threads to be created. Must be a number from<br>
+                          1 thru 4 If a number greater than 4 is entered, the<br>
+                          maximum Thread number will be used. Default: '2'<br>
+    -qs QS                Queue size. Must be a number from 1 thru 50. If a<br>
+                          number greater than 50 is entered, the maximum Queue<br>
+                          number will used. Default: '20'<br>
+    -v, --version         show program's version number and exit<br>
 
-These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.
-
-Error handling added to connection object and error loggin added to save error(s) to error.log.
+These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.<br>
+<br>
+Error handling added to connection object and error loggin added to save error(s) to error.log.<br>
