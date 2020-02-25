@@ -31,7 +31,12 @@ device_queue = Queue()
 
 # establishes connection to device and returns an object back
 def connectToDevice(devcreds):
-    ctd = ConnectHandler(**devcreds)
+    try:
+        ctd = ConnectHandler(**devcreds)
+    except:
+        devcreds['device_type'] = devcreds['device_type'] + '_telnet'
+        ctd = ConnectHandler(**devcreds)
+        print('Connecting to: ' + devcreds['ip'] + ' with telnet')
     return(ctd)
 
 # create the header to be saved into log file for every command read from playbook
@@ -89,7 +94,7 @@ def getargs():
     greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
     entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.8')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.9')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
