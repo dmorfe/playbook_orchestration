@@ -248,14 +248,18 @@ def MakeChangesAndLog(rw):
         write_error_log(playbookinfo['creds']['ip'],e)
 
 # program entry point
-def main():
+def main(args=''):
     global default_user
     global default_pass
     global default_secret
     global arguments
 
-    #read arn parse arguments from command line
-    arguments = getargs()
+    if args == '':
+        #read arn parse arguments from command line
+        arguments = getargs()
+    else:
+        arguments = args
+        
 
     # device_queue.maxsize(arguments.qs)
     print('Setting max Queue size to: ', arguments.qs)
@@ -287,6 +291,35 @@ def main():
         print('Playbook completed with errors. Check the error.log for device(s) with errors.')
     else:
         print('Playbook completed successfully!!')
+
+class Arguments(object):
+    __slots__ = ("inputfile", "w", "ts", "qs")
+    def __init__(self, inputfile, w, ts, qs):
+        self.inputfile = inputfile
+        self.w = w
+        self.ts = ts
+        self.qs = qs
+
+class Orchestration(object):
+    def __init__(self, input_file, w=None, ts=None, qs=None):
+        self.input_file = input_file
+        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs}
+        self.args = Arguments(**args)
+        if self.args.w is None or \
+           self.args.w.upper() != 'Y' and \
+           self.args.w.upper() != 'N':
+            self.args.w = WRITE_CONFIG_DEFAULT
+        if self.args.qs is None:
+            self.args.qs = QS_DEFAULT
+        elif int(self.args.qs) > QS_LIMIT:
+            self.args.qs = QS_LIMIT
+        if self.args.ts is None:
+            self.args.ts = TS_DEFAULT
+        elif int(self.args.ts) > TS_LIMIT:
+            self.args.ts = TS_LIMIT
+
+    def run(self):
+        main(self.args)
 
 # call main function when program is ran
 if __name__ == "__main__":

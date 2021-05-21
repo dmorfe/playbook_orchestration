@@ -12,7 +12,7 @@ The port(s) and VLAN information gets read from an excel workbook (see the Port 
 >> These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
 
 ## These programs require the following prerequisites Python version and packages:
-  ### Prerequisites:
+  ### Dependencies:
     sudo apt update
     sudo apt install software-properties-common
     sudo add-apt-repository ppa:deadsnakes/ppa
