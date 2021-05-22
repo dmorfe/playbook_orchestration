@@ -1,2 +1,0 @@
-netmiko
-pandas
