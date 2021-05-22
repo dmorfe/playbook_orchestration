@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "PyPlaybook",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "David Morfe",
     author_email = "morphetech@gmail.com",
     license = "MIT",

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-Author: David J. Morfe
-Application Name: gomaps
-Functionality Purpose: Acquire google maps data to utilize for web scraping
+Author: David Morfe
+Application Name: PyPlaybook
+Functionality Purpose: Python tool to automate connecting to network devices and retrieve information and/or make configration changes
 Version: Beta
 '''
 
