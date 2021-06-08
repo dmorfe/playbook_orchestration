@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/dmorfe/playbook_orchestration",
-    install_requires = ["netmiko", "pandas"],
+    install_requires = ["netmiko", "pandas", "XLRD"],
     packages = setuptools.find_packages(),
     py_modules = ["PyPlaybook", "Port Range VLAN changes"],
     classifiers = [
