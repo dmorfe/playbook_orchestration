@@ -15,7 +15,7 @@ setuptools.setup(
     url = "https://github.com/dmorfe/playbook_orchestration",
     install_requires = ["netmiko", "pandas", "xlrd", "openpyxl"],
     packages = setuptools.find_packages(),
-    py_modules = ["PyPlaybook", "Port Range VLAN changes"],
+    py_modules = ["PyPlaybook", "Port_Range_VLAN_changes"],
     classifiers = [
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
