@@ -68,8 +68,8 @@ The port(s) and VLAN information gets read from an excel workbook (see the Port 
                           value is entered the default will be no to write the<br>
                           config changes. Default: 'N'<br>
     -ts TS                Number of Threads to be created. Must be a number from<br>
-                          1 thru 10 If a number greater than 10 is entered, the<br>
-                          maximum Thread number will be used. Default: '2'<br>
+                          1 thru 20 If a number greater than 20 is entered, the<br>
+                          maximum Thread number will be used. Default: '10'<br>
     -qs QS                Queue size. Must be a number from 1 thru 50. If a<br>
                           number greater than 50 is entered, the maximum Queue<br>
                           number will used. Default: '20'<br>
