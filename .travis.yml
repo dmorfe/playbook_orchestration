@@ -5,7 +5,7 @@ python:
   - 3.8
 cache: pip
 install: 
-  - pip install netmiko pandas
+  - pip install netmiko pandas xlrd openpyxl
   - pip install git+https://github.com/dmorfe/playbook_orchestration
 script:
   - python3 pyplaybook_tests.py
@@ -14,7 +14,7 @@ jobs:
     - stage: deploy
       python: 3.8
       install: 
-        - pip install netmiko pandas
+        - pip install netmiko pandas xlrd openpyxl
         - pip install git+https://github.com/dmorfe/playbook_orchestration
       script: skip
       before_deploy:
