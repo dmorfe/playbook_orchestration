@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 language: python
 python:
   - 3.6
@@ -24,3 +25,31 @@ jobs:
         username: "__token__"
         password: $PYPI_PASSWORD
         edge: true
+=======
+language: python
+python:
+  - 3.6
+  - 3.7
+  - 3.8
+cache: pip
+install: 
+  - pip install netmiko pandas xlrd openpyxl
+  - pip install git+https://github.com/dmorfe/playbook_orchestration
+script:
+  - python3 pyplaybook_tests.py
+jobs:
+  include:
+    - stage: deploy
+      python: 3.8
+      install: 
+        - pip install netmiko pandas xlrd openpyxl
+        - pip install git+https://github.com/dmorfe/playbook_orchestration
+      script: skip
+      before_deploy:
+        - python3 poppypib.py
+      deploy:
+        provider: pypi
+        username: "__token__"
+        password: $PYPI_PASSWORD
+        edge: true
+>>>>>>> d6af63c1aa3314c22005ecd2a16f12a0da975372
