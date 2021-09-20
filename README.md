@@ -9,8 +9,7 @@
 
 # Playbook Orchestration tool for Network Engineers. Orchestration Tool for Network Engineers.
 # SSH or Telnet to supported devices and run commands and save them to a log file. Great for log collection and configration changes in bulk.
-# The program can also be used to push configuration changes to supported devices. When pushing configs changes the program will create log with
-# before and after changes.
+# The program can also be used to push configuration changes to supported devices. When pushing configs changes the program will create log with before and after changes.
 
 ## PyPlaybook.py:
 >> Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes.
