@@ -159,7 +159,7 @@ The port(s) and VLAN information gets read from an excel workbook (see the Port 
                           number will used. Default: '20'<br>
     -v, --version         show program's version number and exit<br>
 
-These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.<br>
+These Python programs will create a '.log' file in the current directory from where the programs is run. The name of the .log file is automatically generated based on the device name and the IP address of the device.<br>
 <br>
 Error handling added to connection object and error loggin added to save error(s) to error.log.<br>
 >>>>>>> d6af63c1aa3314c22005ecd2a16f12a0da975372
