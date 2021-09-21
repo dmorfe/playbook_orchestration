@@ -9,6 +9,8 @@
 <a href="https://travis-ci.com/github/dmorfe/playbook_orchestration">
   <img src="https://app.travis-ci.com/dmorfe/playbook_orchestration.svg?branch=master&status=passed" />
 </a>
+# ********* THIS PROGRAM CAN NOW ALSI BE INSTALL AS A Pythom package:
+##   - pip install pyplaybook
 
 # Playbook Orchestration tool for Network Engineers.
 # SSH or Telnet to supported devices and run commands and save them to a log file. Great for log collection and configration changes in bulk.
