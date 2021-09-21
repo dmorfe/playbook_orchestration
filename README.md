@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <a href="https://pypi.org/project/PyPlaybook">
   <img src="https://img.shields.io/pypi/v/pyplaybook.svg" alt="latest release" />
 </a>
