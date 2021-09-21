@@ -9,7 +9,7 @@
 <a href="https://travis-ci.com/github/dmorfe/playbook_orchestration">
   <img src="https://app.travis-ci.com/dmorfe/playbook_orchestration.svg?branch=master&status=passed" />
 </a>
-# ********* THIS PROGRAM CAN NOW ALSI BE INSTALL AS A Pythom package:
+# ********* THIS PROGRAM CAN NOW ALSO BE INSTALL AS A Pythom package:
 ##   - pip install pyplaybook
 
 # Playbook Orchestration tool for Network Engineers.
