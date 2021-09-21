@@ -6,6 +6,10 @@
   <img src="https://static.pepy.tech/badge/pyplaybook" alt="downloads" />
 </a>
 
+<a href="https://travis-ci.com/github/dmorfe/playbook_orchestration">
+  <img src="https://app.travis-ci.com/dmorfe/playbook_orchestration.svg?branch=master&status=passed" />
+</a>
+
 # Playbook Orchestration tool for Network Engineers. Orchestration Tool for Network Engineers.
 # SSH or Telnet to supported devices and run commands and save them to a log file. Great for log collection and configration changes in bulk.
 # The program can also be used to push configuration changes to supported devices. When pushing configs changes the program will create log with before and after changes.
