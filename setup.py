@@ -5,11 +5,11 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "PyPlaybook",
-    version = "0.0.3",
+    version = "0.0.4",
     author = "David Morfe",
-    author_email = "morphetech@gmail.com",
+    author_email = "cybercomprepair@gmail.com",
     license = "MIT",
-    description = "Python tool to automate connecting to network devices and retrieve information and/or make configuration changes",
+    description = "SSH/Telnet tool to create log files and to push configuration changes to supported devices.",
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/dmorfe/playbook_orchestration",
