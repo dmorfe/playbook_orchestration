@@ -17,10 +17,12 @@ SHOWCOMMANDS = ['show run','show interface status','show vlan']
 arguments = ''
 error_flag = False
 
-TS_LIMIT = 20
-QS_LIMIT = 50
+TS_LIMIT = 50
+QS_LIMIT = 100
+DELAY_LIMIT = 90
 TS_DEFAULT = 10
 QS_DEFAULT = 20
+DELAY_DEFAULT = 20
 WRITE_CONFIG_DEFAULT = 'N'
 
 default_user = ''
@@ -65,7 +67,7 @@ def logshowcommands(qalogH,connH,commands):
         print(cmd)
         # if cmd is empty skip
         if len(str(cmd).strip()) > 0:
-            showresults = connH.send_command(cmd)
+            showresults = connH.send_command(cmd, delay_factor=arguments.delay)
             qalogH.write(get_logheader(cmd))
             qalogH.write(showresults + '\n\n')
 
@@ -90,14 +92,17 @@ def getargs():
     parser.add_argument('-w', help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N\' to preserve Startup Config. If this flag is not specified or any other \
      value is entered the default will be no to write the config changes.\nDefault: \'N\'')
-    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 20\nIf a number \
-    greater than 20 is entered, the maximum Thread number will be used.\nDefault: \'10\'')
-    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 50.\nIf a number greater than 50 is \
-    entered, the maximum Queue number will used.\nDefault: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 1.9')
+    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 50\nIf a number \
+    greater than 50 is entered, the maximum of 50 will be used.\nDefault: \'10\'')
+    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 100.\nIf a number greater than 100 is \
+    entered, the maximum of 100 used.\nDefault: \'20\'')
+    parser.add_argument('-delay', help='Delay (1 thru 90) for how long the program waits from device to finish processing the send \n\
+    command before it times out and control is return back to program (delay_factor).\n\
+    If number greater than 90 is entered, the maximum of 90 will be used. Default: \'20\'')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
 
-    if args.w is None or (args.w.upper() != 'Y' and args.w.upper() != 'N'):
+    if args.w is None or (args.w.upper() != 'Y'):
         args.w = WRITE_CONFIG_DEFAULT
 
     if args.qs is None:
@@ -109,6 +114,11 @@ def getargs():
         args.ts = TS_DEFAULT
     elif int(args.ts) > TS_LIMIT:
         args.ts = TS_LIMIT
+
+    if args.delay is None:
+        args.delay = DELAY_DEFAULT
+    elif int(args.delay) > DELAY_LIMIT:
+        args.delay = DELAY_LIMIT
 
     return(args)
 
@@ -204,7 +214,7 @@ def MakeChangesAndLog(rw):
                 logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
             else:
                 logshowcommands(qalog,conn,SHOWCOMMANDS)
-            configresults = conn.send_config_set(config_commands=playbookinfo['ConfigCommands'])
+            configresults = conn.send_config_set(config_commands=playbookinfo['ConfigCommands'], delay_factor=arguments.delay)
             print(\
                   '*****************************************************\n' + \
                   '***              Configurations Changes           ***\n' + \
@@ -248,18 +258,14 @@ def MakeChangesAndLog(rw):
         write_error_log(playbookinfo['creds']['ip'],e)
 
 # program entry point
-def main(args=''):
+def main():
     global default_user
     global default_pass
     global default_secret
     global arguments
 
-    if args == '':
-        #read arn parse arguments from command line
-        arguments = getargs()
-    else:
-        arguments = args
-        
+    #read arn parse arguments from command line
+    arguments = getargs()
 
     # device_queue.maxsize(arguments.qs)
     print('Setting max Queue size to: ', arguments.qs)
@@ -285,41 +291,12 @@ def main(args=''):
 
     device_queue.join()
 
-    print(threading.enumerate())
+    #print(threading.enumerate())
     print('\n')
     if error_flag:
         print('Playbook completed with errors. Check the error.log for device(s) with errors.')
     else:
         print('Playbook completed successfully!!')
-
-class Arguments(object):
-    __slots__ = ("inputfile", "w", "ts", "qs")
-    def __init__(self, inputfile, w, ts, qs):
-        self.inputfile = inputfile
-        self.w = w
-        self.ts = ts
-        self.qs = qs
-
-class Orchestration(object):
-    def __init__(self, input_file, w=None, ts=None, qs=None):
-        self.input_file = input_file
-        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs}
-        self.args = Arguments(**args)
-        if self.args.w is None or \
-           self.args.w.upper() != 'Y' and \
-           self.args.w.upper() != 'N':
-            self.args.w = WRITE_CONFIG_DEFAULT
-        if self.args.qs is None:
-            self.args.qs = QS_DEFAULT
-        elif int(self.args.qs) > QS_LIMIT:
-            self.args.qs = QS_LIMIT
-        if self.args.ts is None:
-            self.args.ts = TS_DEFAULT
-        elif int(self.args.ts) > TS_LIMIT:
-            self.args.ts = TS_LIMIT
-
-    def run(self):
-        main(self.args)
 
 # call main function when program is ran
 if __name__ == "__main__":
