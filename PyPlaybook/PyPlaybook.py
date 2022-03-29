@@ -122,6 +122,26 @@ def getargs():
 
     return(args)
 
+    if args.w is None or (args.w.upper() != 'Y'):
+        args.w = WRITE_CONFIG_DEFAULT
+
+    if args.qs is None:
+        args.qs = QS_DEFAULT
+    elif int(args.qs) > QS_LIMIT:
+        args.qs = QS_LIMIT
+
+    if args.ts is None:
+        args.ts = TS_DEFAULT
+    elif int(args.ts) > TS_LIMIT:
+        args.ts = TS_LIMIT
+
+    if args.delay is None:
+        args.delay = DELAY_DEFAULT
+    elif int(args.delay) > DELAY_LIMIT:
+        args.delay = DELAY_LIMIT
+
+    return(args)
+
 # Initializes the threads. Expects an interger as a parameter.
 def CreateThreads(n):
     print('Creating ' + str(n) + ' Threads')
