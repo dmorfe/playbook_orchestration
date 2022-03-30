@@ -317,8 +317,8 @@ def main(args=''):
         print('Playbook completed successfully!!')
 
 class Arguments(object):
-    __slots__ = ("inputfile", "w", "ts", "qs", "delay", "username", "password", "secret)
-    def __init__(self, inputfile, w, ts, qs, username, password, secret):
+    __slots__ = ("inputfile", "w", "ts", "qs", "delay", "username", "password", "secret")
+    def __init__(self, inputfile, w, ts, qs, delay, username, password, secret):
         self.inputfile = inputfile
         self.w = w
         self.ts = ts
@@ -329,9 +329,9 @@ class Arguments(object):
         self.secret = secret
 
 class Orchestration(object):
-    def __init__(self, input_file, w=None, ts=None, qs=None, username=None, password=None, secret=None):
+    def __init__(self, input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None):
         self.input_file = input_file
-        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs, "username": username, "password": password, "secret": secret}
+        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs, "delay": delay, "username": username, "password": password, "secret": secret}
         self.args = Arguments(**args)
         if self.args.w is None or \
            self.args.w.upper() != 'Y' and \
