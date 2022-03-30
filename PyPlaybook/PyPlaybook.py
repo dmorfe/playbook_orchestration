@@ -17,8 +17,8 @@ SHOWCOMMANDS = ['show run','show interface status','show vlan']
 arguments = ''
 error_flag = False
 
-TS_LIMIT = 50
-QS_LIMIT = 100
+TS_LIMIT = 100
+QS_LIMIT = 500
 DELAY_LIMIT = 90
 TS_DEFAULT = 10
 QS_DEFAULT = 20
@@ -92,10 +92,10 @@ def getargs():
     parser.add_argument('-w', help='specify if configuration should be save into Startup Config.\
      \'Y\' to write config \'N\' to preserve Startup Config. If this flag is not specified or any other \
      value is entered the default will be no to write the config changes.\nDefault: \'N\'')
-    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 50\nIf a number \
-    greater than 50 is entered, the maximum of 50 will be used.\nDefault: \'10\'')
-    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 100.\nIf a number greater than 100 is \
-    entered, the maximum of 100 used.\nDefault: \'20\'')
+    parser.add_argument('-ts', help='Number of Threads to be created.\nMust be a number from 1 thru 100\nIf a number \
+    greater than 50 is entered, the maximum of 100 will be used.\nDefault: \'10\'')
+    parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 500.\nIf a number greater than 500 is \
+    entered, the maximum of 500 used.\nDefault: \'20\'')
     parser.add_argument('-delay', help='Delay (1 thru 90) for how long the program waits from device to finish processing the send \n\
     command before it times out and control is return back to program (delay_factor).\n\
     If number greater than 90 is entered, the maximum of 90 will be used. Default: \'20\'')
@@ -277,7 +277,7 @@ def main(args=''):
     default_user = arguments.username
     default_pass = arguments.password
     default_secret = arguments.secret
-    
+
     # device_queue.maxsize(arguments.qs)
     print('Setting max Queue size to: ', arguments.qs)
     device_queue.maxsize = int(arguments.qs)
