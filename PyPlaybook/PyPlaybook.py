@@ -317,7 +317,7 @@ def main(args=''):
         print('Playbook completed successfully!!')
 
 class Arguments(object):
-    __slots__ = ("inputfile", "w", "ts", "qs")
+    __slots__ = ("inputfile", "w", "ts", "qs", "username", "password", "secret)
     def __init__(self, inputfile, w, ts, qs, username, password, secret):
         self.inputfile = inputfile
         self.w = w
