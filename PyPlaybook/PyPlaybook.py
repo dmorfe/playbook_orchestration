@@ -345,6 +345,10 @@ class Orchestration(object):
             self.args.ts = TS_DEFAULT
         elif int(self.args.ts) > TS_LIMIT:
             self.args.ts = TS_LIMIT
+        if self.args.delay is None:
+            self.args.delay = DELAY_DEFAULT
+        elif int(self.args.delay) > DELAY_LIMIT:
+            self.args.delay = DELAY_LIMIT
 
     def run(self):
         main(self.args)
