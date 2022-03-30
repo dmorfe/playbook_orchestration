@@ -285,13 +285,13 @@ def main(args=''):
     worksheets = {}
 
     # if default user or pass or secret is empty, prompt the user to enter it.
-    if default_user == "":
+    if default_user == None:
         default_user = getusername()
         
-    if default_pass == "":
+    if default_pass == None:
         default_pass = getpassword(default_user)
         
-    if default_secret == "":
+    if default_secret == None:
         default_secret = getpassword('enable/secret')
 
     # Initializes the threads.
