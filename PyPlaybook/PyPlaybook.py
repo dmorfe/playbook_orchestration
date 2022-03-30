@@ -273,12 +273,18 @@ def main(args=''):
     else:
         arguments = args
         
-
+    # assign username, password and secret from passed arguments to default user, pass and secret
+    default_user = arguments.username
+    default_pass = arguments.password
+    default_secret = arguments.secret
+    
     # device_queue.maxsize(arguments.qs)
     print('Setting max Queue size to: ', arguments.qs)
     device_queue.maxsize = int(arguments.qs)
 
     worksheets = {}
+
+    # if default user or pass or secret is empty, prompt the user to enter it.
     if default_user == "":
         default_user = getusername()
         
