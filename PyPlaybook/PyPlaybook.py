@@ -99,7 +99,10 @@ def getargs():
     parser.add_argument('-delay', help='Delay (1 thru 90) for how long the program waits from device to finish processing the send \n\
     command before it times out and control is return back to program (delay_factor).\n\
     If number greater than 90 is entered, the maximum of 90 will be used. Default: \'20\'')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 2.0')
+    parser.add_argument('-username', help='Username to login to the device(s)')
+    parser.add_argument('-password', help='Username password')
+    parser.add_argument('-secret', help='Device(s) enable secret')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 3.0')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y'):
@@ -309,16 +312,19 @@ def main(args=''):
 
 class Arguments(object):
     __slots__ = ("inputfile", "w", "ts", "qs")
-    def __init__(self, inputfile, w, ts, qs):
+    def __init__(self, inputfile, w, ts, qs, username, password, secret):
         self.inputfile = inputfile
         self.w = w
         self.ts = ts
         self.qs = qs
+        self.username = username
+        self.password = password
+        self.secret = secret
 
 class Orchestration(object):
-    def __init__(self, input_file, w=None, ts=None, qs=None):
+    def __init__(self, input_file, w=None, ts=None, qs=None, username=None, password=None, secret=None):
         self.input_file = input_file
-        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs}
+        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs, "username": username, "password": password, "secret": secret}
         self.args = Arguments(**args)
         if self.args.w is None or \
            self.args.w.upper() != 'Y' and \
