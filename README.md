@@ -68,6 +68,7 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
 							[-username USERNAME] [-password PASSWORD]<br>
 							[-secret SECRET] [-v]<br>
 	- PyPlaybook.py: error: the following arguments are required: -i/--inputfile<br>
+'''
 
 * PyPlaybook.py -h	(detailed help)
 usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY]
@@ -98,7 +99,7 @@ optional arguments:
   -password PASSWORD    Username password
   -secret SECRET        Device(s) enable secret
   -v, --version         show program's version number and exit
-'''
+
 These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.<br> <br> Error handling added to connection object and error loggin added to save error(s) to error.log.<br>
 
 > > > > > > > d6af63c1aa3314c22005ecd2a16f12a0da975372
