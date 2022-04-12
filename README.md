@@ -12,7 +12,7 @@
 **** THIS PROGRAM CAN ALSO BE USE AS AN import LIBRARY FROM PyPI:
 - pip install PyPlaybook
 - import PyPlaybook
-- config = PyPlaybook.Orchestration(nput_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None)
+- config = PyPlaybook.Orchestration(input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None)
 - config.run()
 
 ## Port Range VLAN changes.py:
@@ -53,7 +53,7 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
   - Windows(run as administrator): pip install xlrd pandas netmiko PyYAML
 ```
 
-> > * To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
+> > * To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the latest Python version and PIP has been installed)
 
 > > * Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
