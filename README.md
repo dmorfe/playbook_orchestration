@@ -64,10 +64,10 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
 > > * For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.<br> -e.g:<br>
 
 ```
-	- usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY<br>
-							[-username USERNAME] [-password PASSWORD]<br>
-							[-secret SECRET] [-v]<br>
-	- PyPlaybook.py: error: the following arguments are required: -i/--inputfile<br>
+- usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY<br>
+				         [-username USERNAME] [-password PASSWORD]<br>
+					 [-secret SECRET] [-v]<br>
+- PyPlaybook.py: error: the following arguments are required: -i/--inputfile<br>
 '''
 
 * PyPlaybook.py -h	(detailed help)
