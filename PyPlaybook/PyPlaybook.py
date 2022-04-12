@@ -19,7 +19,7 @@ error_flag = False
 
 TS_LIMIT = 100
 QS_LIMIT = 500
-DELAY_LIMIT = 90
+DELAY_LIMIT = 300
 TS_DEFAULT = 10
 QS_DEFAULT = 20
 DELAY_DEFAULT = 20
@@ -96,9 +96,9 @@ def getargs():
     greater than 50 is entered, the maximum of 100 will be used.\nDefault: \'10\'')
     parser.add_argument('-qs', help='Queue size.\nMust be a number from 1 thru 500.\nIf a number greater than 500 is \
     entered, the maximum of 500 used.\nDefault: \'20\'')
-    parser.add_argument('-delay', type=int, help='Delay (1 thru 90) for how long the program waits from device to finish processing the send \n\
+    parser.add_argument('-delay', type=int, help='Delay (1 thru 300) for how long the program waits from device to finish processing the send \n\
     command before it times out and control is return back to program (delay_factor).\n\
-    If number greater than 90 is entered, the maximum of 90 will be used. Default: \'20\'')
+    If number greater than 300 is entered, the maximum of 300 will be used. Default: \'20\'')
     parser.add_argument('-username', help='Username to login to the device(s)')
     parser.add_argument('-password', help='Username password')
     parser.add_argument('-secret', help='Device(s) enable secret')
