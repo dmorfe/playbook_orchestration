@@ -1,3 +1,18 @@
+Metadata-Version: 2.1
+Name: PyPlaybook
+Version: 0.0.8
+Summary: SSH/Telnet/playbook/automation tool/configuration tool/push commands from excel
+Home-page: https://github.com/dmorfe/playbook_orchestration
+Author: David Morfe
+Author-email: cybercomprepair@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 <<<<<<< HEAD <a href="https://pypi.org/project/PyPlaybook"> <img src="https://img.shields.io/pypi/v/pyplaybook.svg" alt="latest release" /> </a>
 
 <a href="https://pepy.tech/project/pyplaybook"> <img src="https://static.pepy.tech/badge/pyplaybook" alt="downloads" /> </a>
@@ -12,7 +27,7 @@
 **** THIS PROGRAM CAN ALSO BE USE AS AN import LIBRARY FROM PyPI:
 - pip install PyPlaybook
 - import PyPlaybook
-- config = PyPlaybook.Orchestration(input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None)
+- config = PyPlaybook.Orchestration(nput_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None)
 - config.run()
 
 ## Port Range VLAN changes.py:
@@ -53,7 +68,7 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
   - Windows(run as administrator): pip install xlrd pandas netmiko PyYAML
 ```
 
-> > * To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the latest Python version and PIP has been installed)
+> > * To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the lates Python version and PIP has been installed)
 
 > > * Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
@@ -64,10 +79,10 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
 > > * For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.<br> -e.g:<br>
 
 ```
-- usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY<br>
-				         [-username USERNAME] [-password PASSWORD]<br>
-					 [-secret SECRET] [-v]<br>
-- PyPlaybook.py: error: the following arguments are required: -i/--inputfile<br>
+	- usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY<br>
+							[-username USERNAME] [-password PASSWORD]<br>
+							[-secret SECRET] [-v]<br>
+	- PyPlaybook.py: error: the following arguments are required: -i/--inputfile<br>
 '''
 
 * PyPlaybook.py -h	(detailed help)
@@ -95,8 +110,6 @@ optional arguments:
                         times out and control is return back to program
                         (delay_factor). If number greater than 300 is entered,
                         the maximum of 300 will be used. Default: '20'
-  - outfolder           utput folder to save logs to. Will create folder if it doesnt exist.
-                        (Default: current folder)
   -username USERNAME    Username to login to the device(s)
   -password PASSWORD    Username password
   -secret SECRET        Device(s) enable secret
@@ -105,3 +118,5 @@ optional arguments:
 These Python programs will create a '.log' file in the current directory from where the programs are ran. The name of the .log file is automatically generated based on the device name and the IP address of the device.<br> <br> Error handling added to connection object and error loggin added to save error(s) to error.log.<br>
 
 > > > > > > > d6af63c1aa3314c22005ecd2a16f12a0da975372
+
+

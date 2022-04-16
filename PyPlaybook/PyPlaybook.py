@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 from pandas.io import excel
 from pandas import DataFrame
 from netmiko import ConnectHandler
@@ -23,6 +24,7 @@ DELAY_LIMIT = 300
 TS_DEFAULT = 10
 QS_DEFAULT = 20
 DELAY_DEFAULT = 20
+OUTFOLDER_DEFAULT = "."
 WRITE_CONFIG_DEFAULT = 'N'
 
 default_user = ''
@@ -48,16 +50,16 @@ def get_logheader(commandSent):
     return(logHeader)
 
 # open file to right log
-def openlogfile(hostname, ip):
-    fileH = open(hostname[:len(hostname)-1] + "-" + str(ip) + ".log",'a')
+def openlogfile(hostname, ip, outfolder):
+    fileH = open(str(outfolder).strip() + "\\" + hostname[:len(hostname)-1] + "-" + str(ip) + ".log",'a')
     return(fileH)
 
 # write error to error.log
-def write_error_log(devname, errobj):
+def write_error_log(devname, errobj, outfolder):
     msg = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")) + ' - Login into: ' + devname + ' failed\n' + \
     '   Error: ' + str(errobj) + '\n'
     print(msg)
-    errfh = open('error.log','a')
+    errfh = open(outfolder.strip() + '\error.log','a')
     errfh.write(msg)
     errfh.close()
 
@@ -85,6 +87,14 @@ def getpassword(usern):
         password = getpass('Enter ' + usern + ' password: ')
     return(password)
 
+# create folder
+def create_folder(folder_name):
+    if not(os.path.exists(folder_name)):
+        print("Creating '{}' folder..".format(folder_name))
+        os.mkdir(folder_name)
+    else:
+        print("'{}' already exists!".format(folder_name))
+
 #parse arguments from command line
 def getargs():
     parser = argparse.ArgumentParser(description='Playbook Runner by David Morfe')
@@ -102,7 +112,9 @@ def getargs():
     parser.add_argument('-username', help='Username to login to the device(s)')
     parser.add_argument('-password', help='Username password')
     parser.add_argument('-secret', help='Device(s) enable secret')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 3.0')
+    parser.add_argument('-outfolder', help='Output folder to save logs to. Will create folder if it doesnt exist.\
+         (Default: current folder)')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 3.1')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y'):
@@ -122,6 +134,9 @@ def getargs():
         args.delay = DELAY_DEFAULT
     elif int(args.delay) > DELAY_LIMIT:
         args.delay = DELAY_LIMIT
+    
+    if args.outfolder is None:
+        args.outfolder = OUTFOLDER_DEFAULT
 
     return(args)
 
@@ -156,6 +171,9 @@ def MakeChangesAndLog(rw):
 
     global arguments
     global error_flag
+    global default_user
+    global default_pass
+    global default_secret
 
     playbookinfo['creds']['device_type'] = rw.get('device_type')
     playbookinfo['creds']['ip'] = str(rw.get('IP')).strip()
@@ -190,7 +208,7 @@ def MakeChangesAndLog(rw):
             print(resultprompt)
         else:
             print("----> Already in privilege mode <----\n" + resultprompt)
-        qalog = openlogfile(resultprompt, playbookinfo['creds']['ip'])
+        qalog = openlogfile(resultprompt, playbookinfo['creds']['ip'],arguments.outfolder)
         if (rw.get('Show_Commands') == rw.get('Show_Commands')) and \
         len(str(rw.get('Show_Commands')).strip()) > 0 and rw.get('Config_Commands') != rw.get('Config_Commands'):
             print(\
@@ -217,6 +235,7 @@ def MakeChangesAndLog(rw):
                 logshowcommands(qalog,conn,playbookinfo['ShowCommands'])
             else:
                 logshowcommands(qalog,conn,SHOWCOMMANDS)
+
             configresults = conn.send_config_set(config_commands=playbookinfo['ConfigCommands'], delay_factor=arguments.delay)
             print(\
                   '*****************************************************\n' + \
@@ -258,14 +277,16 @@ def MakeChangesAndLog(rw):
     # capture exception error print and log
     except Exception as e:
         error_flag = True
-        write_error_log(playbookinfo['creds']['ip'],e)
+        write_error_log(playbookinfo['creds']['ip'],e,arguments.outfolder)
 
 # program entry point
 def main(args=''):
+
+    global arguments
+    global error_flag
     global default_user
     global default_pass
     global default_secret
-    global arguments
 
     if args == '':
         #read arn parse arguments from command line
@@ -296,6 +317,8 @@ def main(args=''):
 
     # Initializes the threads.
     CreateThreads(arguments.ts)
+    print("checking to see if '{}' exists...".format(arguments.outfolder))
+    create_folder(arguments.outfolder)
 
     with excel.ExcelFile(arguments.inputfile) as wb:
         for sname in wb.sheet_names:
@@ -317,8 +340,8 @@ def main(args=''):
         print('Playbook completed successfully!!')
 
 class Arguments(object):
-    __slots__ = ("inputfile", "w", "ts", "qs", "delay", "username", "password", "secret")
-    def __init__(self, inputfile, w, ts, qs, delay, username, password, secret):
+    __slots__ = ("inputfile", "w", "ts", "qs", "delay", "username", "password", "secret","outfolder")
+    def __init__(self, inputfile, w, ts, qs, delay, username, password, secret, outfolder):
         self.inputfile = inputfile
         self.w = w
         self.ts = ts
@@ -327,11 +350,12 @@ class Arguments(object):
         self.username = username
         self.password = password
         self.secret = secret
+        self.outfolder = outfolder
 
 class Orchestration(object):
-    def __init__(self, input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None):
+    def __init__(self, input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None, outfolder="."):
         self.input_file = input_file
-        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs, "delay": delay, "username": username, "password": password, "secret": secret}
+        args = {"inputfile": input_file, "w": w, "ts": ts, "qs": qs, "delay": delay, "username": username, "password": password, "secret": secret, "outfolder": outfolder}
         self.args = Arguments(**args)
         if self.args.w is None or \
            self.args.w.upper() != 'Y' and \
