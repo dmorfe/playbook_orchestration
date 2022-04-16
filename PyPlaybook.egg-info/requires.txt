@@ -1,4 +1,0 @@
-netmiko
-pandas
-xlrd
-openpyxl
