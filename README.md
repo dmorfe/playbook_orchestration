@@ -95,7 +95,7 @@ optional arguments:
                         times out and control is return back to program
                         (delay_factor). If number greater than 300 is entered,
                         the maximum of 300 will be used. Default: '20'
-  - outfolder           utput folder to save logs to. Will create folder if it doesnt exist.
+  - outfolder           output folder to save logs to. Will create folder if it doesnt exist.
                         (Default: current folder)
   -username USERNAME    Username to login to the device(s)
   -password PASSWORD    Username password
