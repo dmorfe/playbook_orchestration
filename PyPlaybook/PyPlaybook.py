@@ -114,7 +114,7 @@ def getargs():
     parser.add_argument('-secret', help='Device(s) enable secret')
     parser.add_argument('-outfolder', help='Output folder to save logs to. Will create folder if it doesnt exist.\
          (Default: current folder)')
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 3.1')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 0.0.11')
     args = parser.parse_args()
 
     if args.w is None or (args.w.upper() != 'Y'):
