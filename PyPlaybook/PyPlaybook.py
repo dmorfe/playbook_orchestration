@@ -51,7 +51,7 @@ def get_logheader(commandSent):
 
 # open file to right log
 def openlogfile(hostname, ip, outfolder):
-    fileH = open(str(outfolder).strip() + "\\" + hostname[:len(hostname)-1] + "-" + str(ip) + ".log",'a')
+    fileH = open(str(outfolder).strip() + "/" + hostname[:len(hostname)-1] + "-" + str(ip) + ".log",'a')
     return(fileH)
 
 # write error to error.log
