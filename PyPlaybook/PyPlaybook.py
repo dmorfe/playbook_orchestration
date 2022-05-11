@@ -59,7 +59,7 @@ def write_error_log(devname, errobj, outfolder):
     msg = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")) + ' - Login into: ' + devname + ' failed\n' + \
     '   Error: ' + str(errobj) + '\n'
     print(msg)
-    errfh = open(outfolder.strip() + '\error.log','a')
+    errfh = open(outfolder.strip() + '/error.log','a')
     errfh.write(msg)
     errfh.close()
 
