@@ -1,4 +1,4 @@
-<<<<<<< HEAD <a href="https://pypi.org/project/PyPlaybook"> <img src="https://img.shields.io/pypi/v/pyplaybook.svg" alt="latest release" /> </a>
+<a href="https://pypi.org/project/PyPlaybook"> <img src="https://img.shields.io/pypi/v/pyplaybook.svg" alt="latest release" /> </a>
 
 <a href="https://pepy.tech/project/pyplaybook"> <img src="https://static.pepy.tech/badge/pyplaybook" alt="downloads" /> </a>
 
