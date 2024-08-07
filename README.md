@@ -5,11 +5,11 @@
 
 # Playbook Orchestration tool for Network Engineers. Orchestration Tool for Network Engineers.
 
-## PyPlaybook.py:
+## PyPlaybook:
 
-> > Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes. This tool will allow you to read playbook(s) from an Excel workbook (see Playbook_template.xlsx) and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
+Python tool to automate and orchestrate connecting to network devices and retrieve information and/or make configuration changes. This tool will allow you to read playbook(s) from an Excel workbook (see Playbook_template.xlsx) and get inquiry and/or config commands and run them against a single or multiple device(s). If the Excel workbook contains multiple tabs/sheets the tool will read all tabs from left to right and execute the statements in the playbook accordingly.(check the excel template for more information on the format and naming convention and sample show and config statements.)
 
-**** THIS PROGRAM CAN ALSO BE USE AS AN import LIBRARY FROM PyPI:
+**** This tool can also be used as an imported library from PyPi:
 - `pip install PyPlaybook`
 - ```py
   import PyPlaybook
@@ -18,11 +18,11 @@
 
 ## Port Range VLAN changes.py:
 
-> > This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core. The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes.xlsx template).
+- This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core. The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes.xlsx template).
 
-> > These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
+- These programs have been designed to connect to multiple devices at the same time by using Multi Threads which will reduce the amount of time it will take significantly if the tasks are ran as linear process.
 
-## These programs require the following prerequisites Python version and packages:
+## This tool requires the following prerequisite packages:
 
 ### Dependencies:
 
@@ -54,15 +54,15 @@ sudo ln -s /usr/bin/python3.7 /usr/bin/python
   - Windows(run as administrator): pip install xlrd pandas netmiko PyYAML
 ```
 
-> > * To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the latest Python version and PIP has been installed)
+* To install the packages for Windows, open a command prompt as an administator and run the same commomand. Make sure you have the latest Python version and PIP has been installed)
 
-> > * Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
+* Once you have your Python environment setup just drop the Python tools into a folder in the computer you installed Python and give it a go after you finish reading the rest of this Readme file.
 
-> > * The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be passed as an argument.
+* The tools need to be run from the CLI and the file containing the playbook (Excel Workbook) needs to be passed as an argument.
 
-> > * To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
+* To create your playbook(s) you can use the Excel Workbooks provided in the repository. Make sure you don't remove the first row on the first tab of the spreadsheet since all the supported device_type are included on this row and can be selected on the device_type column from the drop down list.
 
-> > * For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.<br> -e.g:<br>
+* For help on how to run the PyPlaybook.py, run the program without any parameters or with the '-h' flag.<br> -e.g:<br>
 
 ```
 - usage: PyPlaybook.py [-h] -i INPUTFILE [-w W] [-ts TS] [-qs QS] [-delay DELAY<br>
