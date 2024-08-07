@@ -16,7 +16,7 @@ Python tool to automate and orchestrate connecting to network devices and retrie
   config = PyPlaybook.Orchestration(input_file, w=None, ts=None, qs=None, delay=None, username=None, password=None, secret=None)
   config.run()```
 
-## Port Range VLAN changes.py:
+## Port Range VLAN changes:
 
 - This tool will assign/change a port/port range into a vlan on an L2 switch(es) and also add the VLAn to the uplink port on the L2 switch and also add the new VLAN on the distro/core. The port(s) and VLAN information gets read from an excel workbook (see the Port Range VLAN changes.xlsx template).
 
